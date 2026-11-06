@@ -8,8 +8,6 @@ everything up safely. Remember to always check the output.
 
 Built by [@polarnck](https://x.com/polarnck) 
 
----
-
 ## What it does
 
 - Asks whether you use OpenCode V1 or V2.
