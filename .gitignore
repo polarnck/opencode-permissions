@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+.worktrees/
+*.bak-*
+permissions.plan.local.json
