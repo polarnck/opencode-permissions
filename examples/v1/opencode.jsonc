@@ -1,0 +1,48 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // V1 format: one object per tool, pattern -> effect.
+  // Order matters: the LAST matching pattern wins.
+  "permission": {
+    "read": {
+      // Guards first in evaluation order is not required for read: the V1
+      // primary-agent baseline allows reads, so explicit denies win here.
+      "secrets/**": "deny",
+      "**/secrets/**": "deny",
+      "*.env": "deny",
+      "*.env.*": "deny",
+
+      // Exceptions must come after the denies.
+      "secrets/*.example": "allow",
+      "**/secrets/*.example": "allow",
+      "*.env.example": "allow"
+    },
+    "edit": {
+      "secrets/**": "deny",
+      "**/secrets/**": "deny"
+    },
+    "bash": {
+      // Default posture first; a later broad rule would override the allows.
+      "*": "ask",
+      "git status *": "allow",
+      "git diff *": "allow",
+      "git log *": "allow",
+      "ls *": "allow",
+      "cat *": "allow",
+      "grep *": "allow",
+
+      // Guards after the allows. `*secrets/*` matches command text, not paths.
+      "*secrets/*": "deny",
+      "* .env*": "deny",
+      "*/.env*": "deny",
+
+      // Exceptions after the guards.
+      "*secrets/*.example*": "allow",
+      "cat .env.example*": "allow",
+      "*/.env.example*": "allow"
+    },
+    "external_directory": {
+      "~/reference/*": "ask"
+    }
+  }
+}

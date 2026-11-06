@@ -1,0 +1,42 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // V2 format: one ordered list. The LAST matching rule wins.
+  "permissions": [
+    // 1. Default posture for shell. It must be first, otherwise it would
+    //    override every specific allow below it.
+    { "action": "shell", "resource": "*", "effect": "ask" },
+
+    // 2. Routine read-only shell commands.
+    { "action": "shell", "resource": "git status *", "effect": "allow" },
+    { "action": "shell", "resource": "git diff *", "effect": "allow" },
+    { "action": "shell", "resource": "git log *", "effect": "allow" },
+    { "action": "shell", "resource": "ls *", "effect": "allow" },
+    { "action": "shell", "resource": "cat *", "effect": "allow" },
+    { "action": "shell", "resource": "grep *", "effect": "allow" },
+
+    // 3. Guards for a protected folder. Both path forms are needed:
+    //    `**/secrets/**` does not cover the root-level `secrets/`.
+    { "action": "read", "resource": "secrets/**", "effect": "deny" },
+    { "action": "read", "resource": "**/secrets/**", "effect": "deny" },
+    { "action": "edit", "resource": "secrets/**", "effect": "deny" },
+    { "action": "edit", "resource": "**/secrets/**", "effect": "deny" },
+    { "action": "shell", "resource": "*secrets/*", "effect": "deny" },
+    { "action": "read", "resource": "*.env", "effect": "deny" },
+    { "action": "read", "resource": "*.env.*", "effect": "deny" },
+    { "action": "shell", "resource": "* .env*", "effect": "deny" },
+    { "action": "shell", "resource": "*/.env*", "effect": "deny" },
+
+    // 4. A folder outside the project. `external_directory` is a separate
+    //    check, so the read allow and the directory ask are both present.
+    { "action": "external_directory", "resource": "~/reference/*", "effect": "ask" },
+
+    // 5. Exceptions after the guards.
+    { "action": "read", "resource": "secrets/*.example", "effect": "allow" },
+    { "action": "read", "resource": "**/secrets/*.example", "effect": "allow" },
+    { "action": "read", "resource": "*.env.example", "effect": "allow" },
+    { "action": "shell", "resource": "*secrets/*.example*", "effect": "allow" },
+    { "action": "shell", "resource": "cat .env.example*", "effect": "allow" },
+    { "action": "shell", "resource": "*/.env.example*", "effect": "allow" }
+  ]
+}

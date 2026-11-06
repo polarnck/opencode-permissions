@@ -1,0 +1,15 @@
+# Resources for --compare, one per line.
+# Lines starting with `#` and blank lines are ignored.
+git status
+git status --short
+git push origin main
+rm -rf build
+cat README.md
+cat secrets/prod.env
+cat secrets/config.example
+cat src/secrets/prod.env
+cat .env
+cat .env.example
+cat ./.env
+cat ./.env.example
+git status && cat secrets/prod.env

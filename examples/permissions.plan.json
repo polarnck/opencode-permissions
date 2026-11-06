@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "engine": "v2",
+  "scope": "local",
+  "project": "/tmp/opencode-permissions-example/project",
+  "config": "/tmp/opencode-permissions-example/project/opencode.jsonc",
+  "paths": [
+    {
+      "input": "secrets",
+      "kind": "directory",
+      "location": "project",
+      "effect": "block",
+      "shell": "deny"
+    },
+    {
+      "input": "config/prod.json",
+      "kind": "file",
+      "location": "project",
+      "effect": "block",
+      "shell": "deny"
+    },
+    {
+      "input": "**/*.pem",
+      "kind": "pattern",
+      "location": "project",
+      "effect": "block",
+      "shell": "deny"
+    },
+    {
+      "input": "~/reference",
+      "kind": "directory",
+      "location": "home",
+      "effect": "read-only",
+      "shell": "none"
+    },
+    {
+      "input": "/srv/data",
+      "kind": "directory",
+      "location": "absolute",
+      "effect": "read-only",
+      "shell": "none"
+    }
+  ]
+}

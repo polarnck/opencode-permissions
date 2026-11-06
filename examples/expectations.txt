@@ -1,0 +1,39 @@
+# Expectations for examples/v1/opencode.jsonc and examples/v2/opencode.jsonc.
+# Format: effect | action | resource
+# Everything after the second `|` is the resource, so shell pipes are fine.
+# `bash`/`shell` and `task`/`subagent` are accepted as aliases.
+
+# Default posture
+ask    | shell | rm -rf build
+ask    | shell | git push origin main
+ask    | shell | git status && rm -rf build
+
+# Routine commands
+allow  | shell | git status
+allow  | shell | git status --short
+allow  | shell | ls -la
+allow  | shell | cat README.md
+
+# Protected folder: every vector is a separate action
+deny   | shell | cat secrets/prod.env
+deny   | shell | tar -czf out.tgz secrets/prod.env
+deny   | shell | git status && cat secrets/prod.env
+deny   | shell | cat ./.env
+allow  | shell | cat ./.env.example
+deny   | read  | secrets/prod.env
+deny   | read  | src/secrets/prod.env
+deny   | edit  | src/secrets/prod.env
+
+# Exceptions are declared after the guards, so they win
+allow  | shell | cat secrets/config.example
+allow  | read  | secrets/config.example
+allow  | read  | src/secrets/config.example
+
+# Built-in read guards, replaced by explicit denies in both examples
+deny   | read  | .env
+deny   | read  | config/.env.production
+allow  | read  | .env.example
+
+# External folder: directory check and read check are independent
+ask    | external_directory | ~/reference/notes.md
+allow  | read               | ~/reference/notes.md
