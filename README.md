@@ -1,4 +1,4 @@
-# OpenCode Permissions
+# OpenCode Permissions SKILL
 
 Set up and verify [OpenCode](https://opencode.ai/) permission rules without guessing - for V1 and V2, local or global.
 
