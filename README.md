@@ -1,10 +1,9 @@
 # OpenCode Permissions
 
-Set up and verify OpenCode permission rules without guessing — for V1 and V2,
-local or global.
+Set up and verify OpenCode permission rules without guessing - for V1 and V2, local or global.
 
-Vibe-coded and expanded version of my local skill. Point your agent at it and it
-will handle the rest — including the common gotchas and mistakes, so it can set
+Vibecoded and expanded version of my local skill. Point your agent at it and it
+will handle the rest, including the common gotchas and mistakes, so it can set
 everything up safely.
 
 ## What it does
