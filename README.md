@@ -4,7 +4,11 @@ Set up and verify [OpenCode](https://opencode.ai/) permission rules without gues
 
 Vibecoded and expanded version of my local skill. Point your agent at it and it
 will handle the rest, including the common gotchas and mistakes, so it can set
-everything up safely.
+everything up safely. Remember to always check the output.
+
+Built by [@polarnck](https://x.com/polarnck) 
+
+---
 
 ## What it does
 
